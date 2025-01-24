@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>.header-content {
+        text-align: center;
+        padding: 50px 20px;
+        background: #f0f9ff;
+        border-bottom: 2px solid #d9e6f1;
+    }
+    
+    .header-content h1 {
+        font-size: 36px;
+        color: #005f73;
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+    
+    .header-content p {
+        font-size: 18px;
+        color: #333;
+        font-style: italic;
+    }
+<\style>    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}PilPall{% endblock %}</title>
+
+    {% load static %} <!-- Charger la balise static -->
+    
+    <!-- Ajouter votre fichier CSS principal -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+
+    <!-- Bloc pour les styles spécifiques à chaque page -->
+    {% block styles %}
+    {% endblock %}
+</head>
+<body>
+    <header>
+        <!-- Nouveau contenu de l'en-tête -->
+        <div class="header-content">
+            <h1>💊 PilPall - La Santé à Votre Portée! 🌟</h1>
+            <p>Suivez vos stocks, gérez vos médicaments et restez en bonne santé ! 💉💊</p>
+        </div>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2025 PilPall</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+
+{% block title %}Tableau de Bord | PilPall{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="header">
+        <h1>Bienvenue dans votre Tableau de Bord</h1>
+        <p>Choisissez une option pour continuer :</p>
+    </div>
+
+    <div class="menu-container">
+        <div class="menu-item" id="water-status">
+            <div class="menu-icon">💧</div>
+            <h3>État de l'Eau</h3>
+            <p>Suivez l'état de l'eau disponible dans votre installation.</p>
+        </div>
+        <div class="menu-item" id="stock-status">
+            <div class="menu-icon">📦</div>
+            <h3>Stock</h3>
+            <p>Consultez vos stocks de médicaments en temps réel.</p>
+        </div>
+        <div class="menu-item" id="notes">
+            <div class="menu-icon">📝</div>
+            <h3>Notes</h3>
+            <p>Ajoutez et consultez des notes importantes pour votre gestion.</p>
+        </div>
+        <div class="menu-item" id="pills">
+            <div class="menu-icon">💊</div>
+            <h3>Pillules</h3>
+            <p>Suivez les stocks et l'utilisation des pilules.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+    /* Structure de la page */
+    .dashboard-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh; /* Utiliser 100% de la hauteur de la fenêtre */
+        padding: 20px;
+        font-family: 'Roboto', sans-serif;
+        background: linear-gradient(to right, #f0f9ff, #d9e6f1);
+        text-align: center; /* Centrer le texte */
+        box-sizing: border-box; /* Inclure les bordures et les marges dans la taille totale */
+    }
+
+    .header {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .header h1 {
+        font-size: 38px;
+        color: #005f73;
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+
+    .header p {
+        font-size: 20px;
+        color: #333;
+        font-style: italic;
+    }
+
+    /* Menu Container */
+    .menu-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+        width: 100%;
+        max-width: 1200px;
+        margin-top: 50px;
+        justify-items: center;
+        align-items: center;
+        height: auto; /* Permet de ne pas forcer une hauteur */
+    }
+
+    /* Cartes du menu */
+    .menu-item {
+        background-color: #ffffff;
+        padding: 35px;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 250px;
+        width: 240px;
+        position: relative;
+        overflow: hidden;
+        padding-top: 40px;
+    }
+
+    /* Animation du bouton au survol */
+    .menu-item:hover {
+        transform: scale(1.05);
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+        background-color: #008CBA;
+        color: #fff;
+    }
+
+    .menu-item:hover h3,
+    .menu-item:hover p {
+        color: #fff;
+    }
+
+    /* Animation de l'icône */
+    .menu-icon {
+        font-size: 50px;
+        color: #005f73;
+        margin-bottom: 20px;
+        transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .menu-item:hover .menu-icon {
+        transform: scale(1.4);
+        color: #fff;
+    }
+
+    .menu-item h3 {
+        font-size: 24px;
+        color: #005f73;
+        margin-bottom: 15px;
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
+
+    .menu-item p {
+        font-size: 16px;
+        color: #333;
+        transition: color 0.3s ease;
+    }
+
+    /* Animation des éléments du menu */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .menu-item {
+        animation: fadeIn 0.6s ease-out forwards;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .menu-container {
+            grid-template-columns: repeat(2, 1fr); /* 2 colonnes pour les écrans moyens */
+        }
+    }
+
+    @media (max-width: 480px) {
+        .menu-container {
+            grid-template-columns: 1fr; /* 1 colonne pour les petits écrans */
+        }
+    }
+</style>
+{% endblock %}
