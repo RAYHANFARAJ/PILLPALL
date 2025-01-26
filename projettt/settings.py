@@ -26,8 +26,7 @@ SECRET_KEY = 'django-insecure-9m(9%i51y*%a7lry)$3kqgm2+fw6o9v*75n^$f09a&sbv2cto%
 DEBUG = True
 
 LOGIN_URL = '/login/'
-ALLOWED_HOSTS = ['192.168.1.9', 'localhost', '127.0.0.1']
-
+ALLOWED_HOSTS = ['*']
 
 # Remplacez "votre_app" par le nom de votre application
 
@@ -57,11 +56,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'projettt.urls'
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],  # Chemin vers votre dossier templates
+        'DIRS': [BASE_DIR / 'templates'],  # Chemin exact vers le dossier "templates"
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -73,6 +71,8 @@ TEMPLATES = [
         },
     },
 ]
+
+
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
@@ -129,7 +129,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']  # Assurez-vous que ce chemin est correct
+
 ROOT_URLCONF = 'projettt.urls' 
 
 # Default primary key field type
