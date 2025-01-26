@@ -3,11 +3,14 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
+from django.shortcuts import render
 
 User = get_user_model()
 
 def home(request):
+    print("La vue 'home' a été appelée")
     return render(request, 'home.html')
+
 
 @login_required
 def home_authenticated(request):
@@ -72,3 +75,8 @@ def signup_view(request):
         except Exception as e:
             messages.error(request, f"Une erreur est survenue : {e}")
     return render(request, 'signup.html')
+def etat_eau(request):
+    return render(request, 'etat_eau.html')
+def test_view(request):
+    print("La vue test_view a été appelée.")  # Cette ligne doit apparaître dans la console
+    return render(request, 'test.html')
