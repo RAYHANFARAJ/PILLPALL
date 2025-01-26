@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock | PilPall</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to right, #f0f9ff, #d9e6f1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            color: #005f73;
+            margin-bottom: 20px;
+        }
+
+        .chart-container {
+            margin-top: 30px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        /* Icône du menu hamburger */
+        .menu-icon {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 28px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        /* Menu déroulant */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 60px;
+            left: 20px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            padding: 10px 20px;
+            z-index: 1000;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #005f73;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #008CBA;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Icône du menu hamburger -->
+    <div class="menu-icon" id="menuIcon">☰</div>
+
+    <!-- Menu déroulant -->
+    <div class="dropdown-menu" id="dropdownMenu">
+        <a href="/home_authenticated/">Accueil</a>
+        <a href="/etat-eau/">État de l'Eau</a>
+        <a href="/dispense_medicine/">Stock</a>
+        <a href="/medicine-list/">Pilules</a>
+        <a href="/notes/">Notes</a>
+    </div>
+
+    <div class="container">
+        <!-- En-tête -->
+        <div class="header">
+            <h1>Stock des Médicaments</h1>
+        </div>
+
+        <!-- Graphique circulaire -->
+        <div class="chart-container">
+            <canvas id="stockChart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        // Script pour afficher/masquer le menu déroulant
+        const menuIcon = document.getElementById('menuIcon'); // Icône du menu
+        const dropdownMenu = document.getElementById('dropdownMenu'); // Menu déroulant
+
+        menuIcon.addEventListener('click', () => {
+            if (dropdownMenu.style.display === 'block') {
+                dropdownMenu.style.display = 'none';
+            } else {
+                dropdownMenu.style.display = 'block';
+            }
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!menuIcon.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                dropdownMenu.style.display = 'none';
+            }
+        });
+
+        // Médicaments avec leurs quantités
+        const stockData = [
+            { name: "Paracétamol", quantity: 8 },
+            { name: "Ibuprofène", quantity: 15 },
+            { name: "Aspirine", quantity: 4 },
+            { name: "Amoxicilline", quantity: 20 },
+            { name: "Vitamine C", quantity: 2 }
+        ];
+
+        // Graphique circulaire
+        const labels = stockData.map(item => item.name);
+        const quantities = stockData.map(item => item.quantity);
+        const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'];
+
+        const ctx = document.getElementById('stockChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: quantities,
+                    backgroundColor: colors,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    },
+                    title: {
+                        display: true,
+                        text: 'Répartition des Médicaments'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
