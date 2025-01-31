@@ -1,21 +1,99 @@
-{% extends 'base.html' %}
-
-{% block title %}Connexion{% endblock %}
-
-{% block content %}
-<div style="max-width: 400px; margin: auto; padding: 20px; background-color: #f0f9ff; border-radius: 10px; text-align: center;">
-    <h2 style="color: #0077b6;">Connexion</h2>
-    <form method="post" action="{% url 'login' %}">
-        {% csrf_token %}
-        <div style="margin-bottom: 15px;">
-            <label for="username">Nom d'utilisateur :</label>
-            <input type="text" name="username" id="username" required style="width: 100%; padding: 10px; border-radius: 5px;">
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion | PilPall</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #2196F3, #64B5F6, #82E0AA);
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            max-width: 400px;
+            transition: all 0.3s ease;
+        }
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border: 3px solid white;
+        }
+        h2 {
+            color: #00796b;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        button {
+            padding: 12px;
+            width: 100%;
+            background: linear-gradient(45deg, #00796b, #00bfa5);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+            font-size: 18px;
+        }
+        button:hover {
+            background: linear-gradient(45deg, #004d40, #00897b);
+            transform: translateY(-3px);
+        }
+        .error-message {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <img src="/static/images/pillpal_logo.jpg" alt="PilPall Logo" class="logo">
         </div>
-        <div style="margin-bottom: 15px;">
-            <label for="password">Mot de passe :</label>
-            <input type="password" name="password" id="password" required style="width: 100%; padding: 10px; border-radius: 5px;">
-        </div>
-        <button type="submit" style="padding: 10px 20px; background-color: #00a8e8; color: white; border: none; border-radius: 5px;">Se connecter</button>
-    </form>
-</div>
-{% endblock %}
+        <h2>Connexion</h2>
+        {% if messages %}
+            {% for message in messages %}
+                <p class="error-message">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            <div style="margin-bottom: 15px;">
+                <label for="username">Nom d'utilisateur :</label>
+                <input type="text" name="username" id="username" required>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label for="password">Mot de passe :</label>
+                <input type="password" name="password" id="password" required>
+            </div>
+            <button type="submit">Se connecter</button>
+        </form>
+    </div>
+</body>
+</html>

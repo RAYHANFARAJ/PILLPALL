@@ -1,73 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>État de l'Eau | PilPall</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* Général */
         body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #2196F3, #64B5F6, #82E0AA);
+            text-align: center;
             margin: 0;
             padding: 0;
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(to right, #f0f9ff, #d9e6f1);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            position: relative; /* Nécessaire pour positionner le menu */
         }
-
         .container {
-            text-align: center;
-            background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            width: 90%;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
             max-width: 400px;
+            width: 90%;
+            transition: all 0.3s ease;
         }
-
-        .header h1 {
-            font-size: 36px;
-            color: #005f73;
-            margin-bottom: 20px;
-        }
-
-        .water-tube {
+        .logo-container {
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            justify-content: center;
             margin-bottom: 20px;
         }
-
-        .tube {
-            width: 60px;
-            height: 300px;
-            border: 4px solid #005f73;
-            border-radius: 15px;
-            position: relative;
-            background: #e0f7fa;
+        .logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border: 3px solid white;
         }
-
-        .water-level {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            background-color: #008CBA;
-            border-radius: 10px 10px 0 0;
-            transition: height 0.5s ease;
-        }
-
-        .feedback {
-            margin-top: 10px;
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        /* Icône du menu hamburger */
         .menu-icon {
             position: absolute;
             top: 20px;
@@ -76,10 +48,8 @@
             cursor: pointer;
             z-index: 1000;
         }
-
-        /* Menu déroulant */
         .dropdown-menu {
-            display: none; /* Masqué par défaut */
+            display: none;
             position: absolute;
             top: 60px;
             left: 20px;
@@ -89,7 +59,6 @@
             padding: 10px 20px;
             z-index: 1000;
         }
-
         .dropdown-menu a {
             display: block;
             padding: 10px 15px;
@@ -99,202 +68,59 @@
             border-radius: 4px;
             transition: background-color 0.3s ease;
         }
-
         .dropdown-menu a:hover {
             background-color: #008CBA;
             color: #ffffff;
         }
-
-        /* Icône du graphique */
-        .chart-icon {
-            font-size: 30px;
-            color: #008CBA;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: transform 0.3s ease;
-        }
-
-        .chart-icon:hover {
-            transform: scale(1.2);
-        }
-
-        /* Modal pour le graphique */
-        .modal {
-            display: none; /* Par défaut, le modal est caché */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5); /* Fond transparent sombre */
-            justify-content: center;
+        .water-tube {
+            display: flex;
+            flex-direction: column;
             align-items: center;
+            margin-bottom: 20px;
         }
-
-        .modal-content {
-            background-color: #ffffff;
-            border-radius: 12px;
-            padding: 20px;
-            width: 90%;
-            max-width: 600px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            text-align: center;
+        .tube {
+            width: 60px;
+            height: 300px;
+            border: 4px solid #006d77;
+            border-radius: 15px;
             position: relative;
+            background: #e0f7fa;
         }
-
-        .close-modal {
+        .water-level {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 18px;
-            color: #555;
-            cursor: pointer;
-        }
-
-        canvas {
-            max-width: 100%;
-        }
-
-        /* Animation des jaimes */
-        .like-animation {
-            font-size: 24px;
-            color: green;
-            animation: bounce 1s infinite;
-        }
-
-        /* Animation des alertes */
-        .alert-animation {
-            font-size: 24px;
-            color: red;
-            animation: shake 0.5s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        @keyframes shake {
-            0% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            50% { transform: translateX(5px); }
-            75% { transform: translateX(-5px); }
-            100% { transform: translateX(0); }
+            bottom: 0;
+            width: 100%;
+            background-color: #008CBA;
+            border-radius: 10px 10px 0 0;
+            transition: height 0.5s ease;
         }
     </style>
 </head>
 <body>
-    <!-- Icône du menu hamburger -->
     <div class="menu-icon" id="menuIcon">☰</div>
-
-    <!-- Menu déroulant -->
     <div class="dropdown-menu" id="dropdownMenu">
         <a href="/etat-eau/">État de l'Eau</a>
         <a href="/dispense_medicine/">Stock</a>
         <a href="/notes/">Notes</a>
         <a href="/medicine-list/">Pilules</a>
-        <a href="/home_authenticated/">home</a>
+        <a href="/home_authenticated/">Home</a>
     </div>
-
     <div class="container">
-        <!-- En-tête -->
-        <div class="header">
-            <h1>État de l'Eau</h1>
+        <div class="logo-container">
+            <img src="/static/images/pillpal_logo.jpg" alt="PilPall Logo" class="logo">
         </div>
-
-        <!-- Tube d'eau -->
+        <h1>État de l'Eau</h1>
         <div class="water-tube">
             <div class="tube">
-                <div class="water-level" id="waterLevel" style="height: 60%;"></div> <!-- Hauteur dynamique -->
+                <div class="water-level" id="waterLevel" style="height: 40%;"></div>
             </div>
-            <p class="feedback" id="waterFeedback">Le niveau de l'eau est actuellement à 60%.</p>
-            <div id="feedbackZone"></div>
-        </div>
-
-        <!-- Icône du graphique -->
-        <div class="chart-icon" id="openChart">📊</div>
-    </div>
-
-    <!-- Modal du graphique -->
-    <div class="modal" id="chartModal">
-        <div class="modal-content">
-            <span class="close-modal" id="closeChart">✖</span>
-            <canvas id="waterUsageChart"></canvas>
+            <p class="feedback" id="waterFeedback">Le niveau de l'eau est actuellement à 40%.</p>
+            <div id="feedbackZone" class="alert-animation">⚠️ Attention ! Niveau faible ⚠️</div>
         </div>
     </div>
-
     <script>
-        // Niveau d'eau dynamique
-        const waterLevel = document.getElementById('waterLevel');
-        const waterFeedback = document.getElementById('waterFeedback');
-        const feedbackZone = document.getElementById('feedbackZone');
-
-        const waterLevelPercentage = 40; // Exemple : niveau dynamique
-
-        waterLevel.style.height = `${waterLevelPercentage}%`;
-        waterFeedback.textContent = `Le niveau de l'eau est actuellement à ${waterLevelPercentage}%.`;
-
-        if (waterLevelPercentage > 50) {
-            feedbackZone.innerHTML = '<div class="like-animation">👍 👍 👍</div>';
-        } else {
-            feedbackZone.innerHTML = '<div class="alert-animation">⚠️ Attention ! Niveau faible ⚠️</div>';
-        }
-
-        // Modal pour le graphique
-        const chartModal = document.getElementById('chartModal');
-        const openChart = document.getElementById('openChart');
-        const closeChart = document.getElementById('closeChart');
-
-        openChart.addEventListener('click', () => {
-            chartModal.style.display = 'flex';
-        });
-
-        closeChart.addEventListener('click', () => {
-            chartModal.style.display = 'none';
-        });
-
-        // Données pour le graphique
-        const data = {
-            labels: ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'],
-            datasets: [{
-                label: 'Utilisation de l\'eau (litres)',
-                data: [50, 70, 80, 60, 90, 100, 75],
-                backgroundColor: 'rgba(0, 123, 255, 0.5)',
-                borderColor: 'rgba(0, 123, 255, 1)',
-                borderWidth: 2,
-                tension: 0.4,
-                fill: true,
-            }]
-        };
-
-        const config = {
-            type: 'line',
-            data: data,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    title: {
-                        display: true,
-                        text: 'Consommation hebdomadaire d\'eau'
-                    }
-                }
-            }
-        };
-
-        const ctx = document.getElementById('waterUsageChart').getContext('2d');
-        new Chart(ctx, config);
-
-        // Menu déroulant
         const menuIcon = document.getElementById('menuIcon');
         const dropdownMenu = document.getElementById('dropdownMenu');
-
         menuIcon.addEventListener('click', () => {
             dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
         });

@@ -1,32 +1,114 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil | PilPall</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #2196F3, #64B5F6, #82E0AA);
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        .background-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            max-width: 900px;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .logo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            border: 5px solid white;
+        }
+        h1 {
+            color: #00796b;
+            font-size: 50px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        p {
+            font-size: 22px;
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        .highlight-text {
+            font-size: 26px;
+            font-weight: bold;
+            color: #00796b;
+            margin-bottom: 30px;
+        }
+        .btn {
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #00796b, #00bfa5);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 22px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+        .btn:hover {
+            background: linear-gradient(45deg, #004d40, #00897b);
+            transform: translateY(-3px);
+        }
+        .button-group {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+    </style>
 </head>
 <body>
-    <div style="
-        background-color: #f0f9ff;
-        padding: 60px 30px;
-        border-radius: 15px;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        max-width: 900px;
-        margin: auto;
-        transition: all 0.3s ease;
-    ">
-        <h1 style="color: #0077b6; font-size: 42px; margin-bottom: 20px; font-weight: bold;">Bienvenue sur PilPall</h1>
-        <p style="font-size: 20px; color: #555; line-height: 1.6; margin-bottom: 40px;">
-            Votre solution complète pour gérer efficacement vos stocks de médicaments, suivre vos activités pharmaceutiques et optimiser vos opérations quotidiennes.
-        </p>
-        <div style="margin-top: 40px;">
-            <a href="/dashboard/" style="padding: 18px 35px; background-color: #00a8e8; color: white; text-decoration: none; border-radius: 8px; font-size: 20px; font-weight: bold; transition: background-color 0.3s ease, transform 0.3s ease; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">Accéder au Tableau de Bord</a>
+    <div class="background-overlay"></div>
+    <div class="container">
+        <div class="logo-container">
+            <img src="/static/images/pillpal_logo.jpg" alt="PilPall Logo" class="logo">
         </div>
-    </div>
-    <div style="margin-top: 60px; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
-        <a href="/login/" style="padding: 18px 35px; background-color: #00a8e8; color: white; text-decoration: none; border-radius: 8px; font-size: 20px; font-weight: bold; transition: background-color 0.3s ease, transform 0.3s ease; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">Se connecter</a>
-        <a href="/signup/" style="padding: 18px 35px; background-color: #0077b6; color: white; text-decoration: none; border-radius: 8px; font-size: 20px; font-weight: bold; transition: background-color 0.3s ease, transform 0.3s ease; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">S'inscrire</a>
+        <h1>Bienvenue sur PilPall</h1>
+        <p class="highlight-text">Votre assistant intelligent pour une meilleure gestion des médicaments.</p>
+        <p>Un suivi fluide, une organisation optimisée et une tranquillité d'esprit assurée.</p>
+        <div class="button-group">
+            <a href="/login/" class="btn">Se connecter</a>
+            <a href="/signup/" class="btn">S'inscrire</a>
+        </div>
     </div>
 </body>
 </html>

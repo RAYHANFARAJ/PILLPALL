@@ -5,7 +5,7 @@ urlpatterns = [
     path('', views.home, name='home'),  # Route pour la page d'accueil
     path('home_authenticated/', views.home_authenticated, name='home_authenticated'),
     path('dashboard/', views.dashboard, name='dashboard'),
-    path('add-medicine/', views.add_medicine, name='add_medicine'),
+    path('notes/', views.notes, name='notes'),
     path('medicine-list/', views.medicine_list, name='medicine_list'),
     path('dispense_medicine/', views.dispense_medicine, name='dispense_medicine'),
 

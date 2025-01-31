@@ -21,8 +21,8 @@ def dashboard(request):
     return render(request, 'dashboard.html')
 
 @login_required
-def add_medicine(request):
-    return render(request, 'add_medicine.html')
+def notes(request):
+    return render(request, 'notes.html')
 
 @login_required
 def medicine_list(request):

@@ -1,42 +1,96 @@
-{% extends 'base.html' %}
-
-{% block title %}Inscription{% endblock %}
-
-{% block content %}
-<div style="max-width: 400px; margin: auto; padding: 20px; background-color: #f0f9ff; border-radius: 10px; text-align: center;">
-    <h2 style="color: #0077b6;">Inscription</h2>
-
-    <!-- Section pour afficher les messages -->
-    {% if messages %}
-        <div style="margin: 20px 0;">
-            {% for message in messages %}
-                <div style="padding: 10px; background-color: #ffe0e0; border: 1px solid #ffaaaa; color: #d80000; border-radius: 5px; margin-bottom: 10px;">
-                    {{ message }}
-                </div>
-            {% endfor %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription | PilPall</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f2f1;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            background-color: #d1e8e2;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .logo {
+            width: 80px;
+            height: auto;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            background-color: white;
+            padding: 5px;
+        }
+        h2 {
+            color: #006d77;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #008080;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #004d4d;
+        }
+        .error-message {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <img src="/static/images/logo.jpg" alt="PilPall Logo" class="logo">
         </div>
-    {% endif %}
-
-    <!-- Formulaire d'inscription -->
-    <form method="post" action="{% url 'signup' %}">
-        {% csrf_token %}
-        <div style="margin-bottom: 15px;">
-            <label for="username">Nom d'utilisateur :</label>
-            <input type="text" name="username" id="username" required style="width: 100%; padding: 10px; border-radius: 5px;">
-        </div>
-        <div style="margin-bottom: 15px;">
-            <label for="email">Email :</label>
-            <input type="email" name="email" id="email" required style="width: 100%; padding: 10px; border-radius: 5px;">
-        </div>
-        <div style="margin-bottom: 15px;">
-            <label for="password">Mot de passe :</label>
-            <input type="password" name="password" id="password" required style="width: 100%; padding: 10px; border-radius: 5px;">
-        </div>
-        <div style="margin-bottom: 15px;">
-            <input type="checkbox" name="is_doctor" id="is_doctor" value="yes">
-            <label for="is_doctor">Je suis docteur</label>
-        </div>
-        <button type="submit" style="padding: 10px 20px; background-color: #00a8e8; color: white; border: none; border-radius: 5px;">S'inscrire</button>
-    </form>
-</div>
-{% endblock %}
+        <h2>Inscription</h2>
+        {% if messages %}
+            <div style="margin: 20px 0;">
+                {% for message in messages %}
+                    <div class="error-message">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <form method="post" action="{% url 'signup' %}">
+            {% csrf_token %}
+            <div style="margin-bottom: 15px;">
+                <label for="username">Nom d'utilisateur :</label>
+                <input type="text" name="username" id="username" required>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label for="email">Email :</label>
+                <input type="email" name="email" id="email" required>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label for="password">Mot de passe :</label>
+                <input type="password" name="password" id="password" required>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <input type="checkbox" name="is_doctor" id="is_doctor" value="yes">
+                <label for="is_doctor">Je suis docteur</label>
+            </div>
+            <button type="submit">S'inscrire</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -28,6 +28,9 @@ DEBUG = True
 LOGIN_URL = '/login/'
 ALLOWED_HOSTS = ['*']
 
+STATICFILES_DIRS = [BASE_DIR / "static"]
+
+
 # Remplacez "votre_app" par le nom de votre application
 
 

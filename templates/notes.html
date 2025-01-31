@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestion des Pilules | PilPall</title>
+    <title>Notes | PilPall</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
@@ -57,7 +57,6 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
             max-width: 900px;
             width: 90%;
-            transition: all 0.3s ease;
         }
         .logo-container {
             display: flex;
@@ -72,33 +71,19 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             border: 3px solid white;
         }
-        h1 {
-            color: #00796b;
-            font-size: 32px;
-            font-weight: bold;
-        }
-        .pill-table {
+        .notes-container {
             margin-top: 20px;
-            width: 100%;
-            border-collapse: collapse;
+            text-align: left;
         }
-        .pill-table th, .pill-table td {
-            border: 1px solid #ccc;
-            padding: 10px;
-            text-align: center;
-        }
-        .pill-table th {
-            background-color: #f0f9ff;
-            color: #005f73;
-        }
-        .alert {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #ffe6e6;
-            color: #d80000;
+        .note {
+            background: #f0f9ff;
+            padding: 15px;
             border-radius: 8px;
-            font-weight: bold;
-            display: none;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .note strong {
+            color: #0077b6;
         }
     </style>
 </head>
@@ -115,18 +100,9 @@
         <div class="logo-container">
             <img src="/static/images/pillpal_logo.jpg" alt="PilPall Logo" class="logo">
         </div>
-        <h1>Gestion des Pilules</h1>
-        <table class="pill-table">
-            <thead>
-                <tr>
-                    <th>Nom de la Pilule</th>
-                    <th>Quantité</th>
-                    <th>Prochaine Prise</th>
-                </tr>
-            </thead>
-            <tbody id="pillTable"></tbody>
-        </table>
-        <div class="alert" id="alert">Certaines pilules nécessitent une attention immédiate !</div>
+        <h1>Historique des Médicaments</h1>
+        <p>Suivez les médicaments pris par chaque patient.</p>
+        <div class="notes-container" id="notesContainer"></div>
     </div>
     <script>
         document.getElementById('menuIcon').addEventListener('click', function() {
@@ -139,6 +115,24 @@
             if (!menu.contains(event.target) && !menuIcon.contains(event.target)) {
                 menu.style.display = 'none';
             }
+        });
+
+        const notesData = [
+            { patientId: 101, name: "Jean Dupont", medication: "Paracétamol", time: "08:00" },
+            { patientId: 102, name: "Marie Curie", medication: "Ibuprofène", time: "12:30" },
+            { patientId: 103, name: "Albert Einstein", medication: "Aspirine", time: "18:00" }
+        ];
+
+        const notesContainer = document.getElementById('notesContainer');
+        notesData.forEach(note => {
+            const noteDiv = document.createElement('div');
+            noteDiv.classList.add('note');
+            noteDiv.innerHTML = `
+                <strong>ID Patient:</strong> ${note.patientId}<br>
+                <strong>Nom:</strong> ${note.name}<br>
+                <strong>Médicament:</strong> ${note.medication}<br>
+                <strong>Heure:</strong> ${note.time}`;
+            notesContainer.appendChild(noteDiv);
         });
     </script>
 </body>
